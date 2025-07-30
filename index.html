@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="신용등급 상관없이 누구나 가능한 무심사 장기렌트. 무보증금, 당일승인, 즉시출고.">
+    <title>무심사 장기렌트 | 신용무관 당일승인</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #1a2332; /* 단순 색상으로 변경 */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Section */
+        .main {
+            padding: 12px 16px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ff0066;
+            background: linear-gradient(135deg, #ff0066 0%, #ff3366 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(255, 0, 102, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 15px rgba(255, 0, 102, 0.4);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(255, 0, 102, 0.6);
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(255, 0, 102, 0.4);
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        h1 .highlight {
+            color: #60a5fa;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefit {
+            background: rgba(37, 99, 235, 0.15);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            text-align: center;
+            /* backdrop-filter 제거 */
+        }
+
+        .benefit-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .benefit h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            line-height: 1.2;
+            word-break: keep-all;
+            color: white;
+        }
+
+        .benefit p {
+            font-size: 12px;
+            color: #e2e8f0;
+            line-height: 1.3;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 그림자 축소 */
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header {
+            margin-bottom: 10px;
+        }
+
+        .form-header h2 {
+            font-size: 20px;
+            margin-bottom: 2px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .form-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Trust Points */
+        .trust-points {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 6px;
+            background: #fef3c7;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+
+        .trust-point {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--dark);
+            font-size: 13px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px 11px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease; /* transition 간소화 */
+            background: #f8f9fa;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 18px;
+            padding-right: 36px;
+            background-color: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            /* box-shadow 제거 */
+            background: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 1px;
+            cursor: pointer;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+            border-radius: 4px;
+        }
+
+        .checkbox-group label {
+            flex: 1;
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--gray);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* transition 간소화 */
+            position: relative;
+            overflow: hidden;
+            /* box-shadow 제거 */
+        }
+
+        .submit-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            /* 애니메이션 간소화 */
+            width: 90%;
+            max-width: 320px;
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--success);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 999;
+        }
+
+        /* Loading */
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            /* 애니메이션 비활성화 옵션 */
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 14px;
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 20px;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+                margin-bottom: 4px;
+                color: white;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 14px;
+            }
+
+            .benefits {
+                gap: 6px;
+                margin-bottom: 14px;
+            }
+
+            .benefit {
+                padding: 8px;
+            }
+
+            .benefit-icon {
+                font-size: 18px;
+            }
+
+            .benefit h3 {
+                font-size: 11px;
+            }
+
+            .form-container {
+                padding: 14px;
+            }
+
+            .form-header h2 {
+                font-size: 18px;
+            }
+
+            .trust-points {
+                gap: 8px;
+                padding: 6px;
+            }
+
+            .trust-point {
+                font-size: 10px;
+                color: #92400e;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 9px 11px;
+                font-size: 14px;
+            }
+
+            .submit-button {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        /* Very small devices */
+        @media (max-height: 700px) {
+            .main {
+                padding: 8px 16px;
+            }
+
+            .badge {
+                margin-bottom: 8px;
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 4px;
+                color: white;
+            }
+
+            .subtitle {
+                margin-bottom: 8px;
+                color: #cbd5e1;
+            }
+
+            .benefits {
+                margin-bottom: 8px;
+                gap: 3px;
+            }
+
+            .benefit {
+                padding: 4px 2px;
+            }
+
+            .benefit-icon {
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+
+            .benefit h3 {
+                font-size: 10px;
+            }
+
+            .benefit p {
+                font-size: 9px;
+            }
+
+            .form-container {
+                padding: 14px;
+            }
+
+            .trust-points {
+                margin-bottom: 6px;
+                padding: 4px;
+            }
+
+            .form-group {
+                margin-bottom: 4px;
+            }
+
+            .checkbox-group {
+                margin-bottom: 8px;
+            }
+
+            .footer {
+                margin-top: 12px;
+                padding: 10px;
+            }
+        }
+
+        /* Safe Area */
+        @supports (padding: max(0px)) {
+            .container {
+                padding-top: max(0px, env(safe-area-inset-top));
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* 저사양 기기를 위한 추가 최적화 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            .badge {
+                animation: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="badge">⚡ 신용조회 없음 · 당일 승인 ⚡</div>
+            
+            <h1>
+                신용등급 상관없이<br>
+                <span class="highlight">무심사 장기렌트</span>
+            </h1>
+            
+            <p class="subtitle">
+                신용불량자, 연체자, 무직자도 가능<br>
+                빠른 상담으로 즉시 해결해드립니다
+            </p>
+
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>무료 상담 신청</h2>
+                    <p>1분이면 충분합니다</p>
+                </div>
+
+                <div class="trust-points">
+                    <div class="trust-point">
+                        <span>✨</span>
+                        <span>100% 승인 가능</span>
+                    </div>
+                    <div class="trust-point">
+                        <span>🔒</span>
+                        <span>개인정보 안전</span>
+                    </div>
+                    <div class="trust-point">
+                        <span>📞</span>
+                        <span>24시간 내 연락</span>
+                    </div>
+                </div>
+                
+                <form id="consultForm">
+                    <div class="form-group">
+                        <label for="name">이름 *</label>
+                        <input type="text" id="name" name="name" required placeholder="성함을 입력해주세요">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">연락처 *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000" inputmode="tel">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="carType">희망 차종</label>
+                        <input type="text" id="carType" name="carType" placeholder="예: 그랜져, GV80">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="situation">현재 상황 (선택)</label>
+                        <select id="situation" name="situation">
+                            <option value="">선택해주세요</option>
+                            <option value="신용불량">신용불량/금융채무불이행</option>
+                            <option value="연체중">현재 연체중</option>
+                            <option value="개인회생">개인회생/파산</option>
+                            <option value="무직">무직/프리랜서</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactTime">연락 가능한 시간</label>
+                        <select id="contactTime" name="contactTime">
+                            <option value="">시간대를 선택해주세요</option>
+                            <option value="오전 9시-12시">오전 9시-12시</option>
+                            <option value="오후 12시-3시">오후 12시-3시</option>
+                            <option value="오후 3시-6시">오후 3시-6시</option>
+                            <option value="오후 6시-9시">오후 6시-9시</option>
+                            <option value="언제든 가능">언제든 가능</option>
+                        </select>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">
+                            개인정보 수집 및 이용에 동의합니다 (필수)
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        <span id="submitText">상담 신청하기</span>
+                        <span id="submitLoader" style="display: none;"><div class="loader"></div></span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">✅</div>
+                    <h3>신용조회 없음</h3>
+                    <p>신용등급 영향 없음</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>당일 승인</h3>
+                    <p>빠른 심사 진행</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">💰</div>
+                    <h3>무보증금 가능</h3>
+                    <p>초기비용 부담 최소</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🚗</div>
+                    <h3>즉시 출고</h3>
+                    <p>최대 3일 이내</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 오토포레스트. 모든 권리 보유.</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="success-modal" id="successModal">
+        <div class="success-icon">✓</div>
+        <h3>신청이 완료되었습니다!</h3>
+        <p>담당자가 곧 연락드리겠습니다.</p>
+    </div>
+
+    <script>
+        // 메모리 최적화를 위한 debounce 함수
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Prevent double tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        // Form Submission
+        document.getElementById('consultForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+            const submitButton = e.target.querySelector('.submit-button');
+            
+            // Show loading state
+            submitText.style.display = 'none';
+            submitLoader.style.display = 'inline-block';
+            submitButton.disabled = true;
+            
+            // Get form data
+            const formData = {
+                timestamp: new Date().toLocaleString('ko-KR'),
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                carType: document.getElementById('carType').value || '미정',
+                situation: document.getElementById('situation').value || '미선택',
+                contactTime: document.getElementById('contactTime').value || '미선택'
+            };
+            
+            // Google Apps Script URL
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxS8f_Etj9Ja7pHm7ZjFBJ0D6ZaY2fibgSbkVAFFE0yXEndZa855a5DcLeR7XrFrxGH/exec';
+            
+            try {
+                // Send data to Google Sheets
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                // Show success modal
+                showSuccess();
+                
+                // Reset form
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                // Even if there's an error, show success (due to no-cors mode)
+                showSuccess();
+                e.target.reset();
+            } finally {
+                // Reset button state
+                setTimeout(() => {
+                    submitText.style.display = 'inline';
+                    submitLoader.style.display = 'none';
+                    submitButton.disabled = false;
+                }, 1000);
+            }
+        });
+
+        // Show Success Modal
+        function showSuccess() {
+            const overlay = document.getElementById('overlay');
+            const successModal = document.getElementById('successModal');
+            
+            overlay.style.display = 'block';
+            successModal.style.display = 'block';
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                successModal.style.display = 'none';
+            }, 3000);
+        }
+
+        // Phone number formatting with debounce
+        const formatPhoneNumber = debounce((e) => {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length >= 11) {
+                value = value.slice(0, 11);
+            }
+            
+            if (value.length >= 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+            } else if (value.length >= 3) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            }
+            
+            e.target.value = value;
+        }, 100);
+
+        document.getElementById('phone').addEventListener('input', formatPhoneNumber);
+
+        // Close modal on overlay click
+        document.getElementById('overlay').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('successModal').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
